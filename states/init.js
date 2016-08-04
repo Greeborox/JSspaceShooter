@@ -20,7 +20,7 @@ SpaceShooter.init = {
     game.spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     if (!game.device.desktop) {
       game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-      game.scale.setMinMax(game.width/2, game.height/2,
+      game.scale.setMinMax(game.width/3, game.height/3,
       game.width*2, game.height*2);
       game.scale.pageAlignHorizontally = true;
       game.scale.pageAlignVertically = true;

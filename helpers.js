@@ -40,6 +40,11 @@ SpaceShooter.addMobileInputs = function(game, player){
   }, this);
 }
 SpaceShooter.bigAsteroidHit = function(bullet,asteroid){
+  asteroid.smallOnes.addSmall(asteroid.x,asteroid.y);
+  bullet.kill();
+  asteroid.kill();
+}
+SpaceShooter.smallAsteroidHit = function(bullet,asteroid){
   bullet.kill();
   asteroid.kill();
 }

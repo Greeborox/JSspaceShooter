@@ -1,4 +1,4 @@
-SpaceShooter.createBigAsteroids = function(game){
+SpaceShooter.createBigAsteroids = function(game, small){
   bigAsteroids = game.add.group();
   bigAsteroids.enableBody = true;
   bigAsteroids.createMultiple(10, 'bigAsteroid');
@@ -16,6 +16,7 @@ SpaceShooter.createBigAsteroids = function(game){
     asteroid.anchor.setTo(0.5);
     asteroid.reset(game.world.width, verticalPos);
     asteroid.body.velocity.x = -100;
+    asteroid.smallOnes = small;
     asteroid.checkWorldBounds = true;
     asteroid.outOfBoundsKill = true;
   }

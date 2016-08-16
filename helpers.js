@@ -48,3 +48,16 @@ SpaceShooter.smallAsteroidHit = function(bullet,asteroid){
   bullet.kill();
   asteroid.kill();
 }
+SpaceShooter.turretHit = function(bullet,turret){
+  bullet.kill();
+  if(turret.vulnerable){
+    turret.kill();
+  }
+}
+SpaceShooter.enemyShipHit = function(bullet,enemy){
+  bullet.kill();
+  if(enemy.vulnerable){
+    enemy.HP -= 1;
+    enemy.hit();
+  }
+}

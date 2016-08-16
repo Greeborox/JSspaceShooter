@@ -5,8 +5,11 @@ SpaceShooter.init = {
     game.load.image('background', 'GFX/bg.png');
     game.load.image('player', 'GFX/player.png');
     game.load.image('bullet', 'GFX/bullet.png');
+    game.load.image('enemyBullet', 'GFX/enemyBullet.png');
     game.load.image('bigAsteroid', 'GFX/bigAsteroid.png');
     game.load.image('smallAsteroid', 'GFX/smallAsteroid.png');
+    game.load.image('enemyShip', 'GFX/enemyShip.png');
+    game.load.spritesheet('turret', 'GFX/turret.png',40,70);
     game.load.image('up', 'GFX/up.png');
     game.load.image('down', 'GFX/down.png');
     game.load.image('shoot', 'GFX/shoot.png');

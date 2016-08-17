@@ -1,14 +1,15 @@
-SpaceShooter.createTurrets = function(game){
+SpaceShooter.createTurrets = function(game, powerUp){
   turrets = game.add.group();
   turrets.enableBody = true;
   turrets.createMultiple(5, 'turret');
   turrets.lastTurret = 0
   turrets.turretsEvery = 8200;
+  turrets.powerUps = powerUp;
   turrets.bullets = game.add.group();
   turrets.bullets.enableBody = true;
   turrets.bullets.createMultiple(15, 'enemyBullet');
 
-  turrets.spawn = function(astX,astY) {
+  turrets.spawn = function() {
     var turret = this.getFirstDead();
     turret.frame = 0;
     if (!turret) {
@@ -19,6 +20,7 @@ SpaceShooter.createTurrets = function(game){
     turret.shootEvery = game.rnd.integerInRange(5000, 8000);
     turret.lastShoot = -500;
     turret.vulnerable = false;
+    turret.powerUps = powerUp;
     turret.checkWorldBounds = true;
     turret.outOfBoundsKill = true;
   }

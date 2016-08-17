@@ -1,4 +1,4 @@
-SpaceShooter.createEnemyShips = function(game){
+SpaceShooter.createEnemyShips = function(game, powerUp){
   enemyShips = game.add.group();
   enemyShips.enableBody = true;
   enemyShips.createMultiple(3, 'enemyShip');
@@ -21,6 +21,7 @@ SpaceShooter.createEnemyShips = function(game){
     ship.lastShoot = -500;
     ship.HP = 3;
     ship.vulnerable = true;
+    ship.powerUps = powerUp;
     ship.hit = function(){
       this.tint = 0xff0000;
       this.vulnerable = false;
@@ -64,6 +65,7 @@ SpaceShooter.createEnemyShips = function(game){
       }
       if(item.HP <= 0) {
         item.kill();
+        item.powerUps.add(item.x,item.y);
       }
     },this)
   }

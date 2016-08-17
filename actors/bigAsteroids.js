@@ -1,4 +1,4 @@
-SpaceShooter.createBigAsteroids = function(game, small){
+SpaceShooter.createBigAsteroids = function(game, small, powerUp){
   bigAsteroids = game.add.group();
   bigAsteroids.enableBody = true;
   bigAsteroids.createMultiple(10, 'bigAsteroid');
@@ -19,6 +19,7 @@ SpaceShooter.createBigAsteroids = function(game, small){
     asteroid.smallOnes = small;
     asteroid.checkWorldBounds = true;
     asteroid.outOfBoundsKill = true;
+    asteroid.powerUps = powerUp;
   }
 
   bigAsteroids.update = function(){

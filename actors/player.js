@@ -1,11 +1,11 @@
 SpaceShooter.createPlayer = function(game){
   var player = game.add.sprite(150,300, 'player');
   game.physics.arcade.enable(player);
-  player.bullets = game.add.group();
-  player.bullets.enableBody = true;
-  player.bullets.createMultiple(10, 'bullet');
+  player.weapons;
+  player.currWeapon = 'single';
   player.moveUp = false;
   player.moveDown = false;
+  player.shooting = false
   player.lastShot = 0;
 
   player.update = function() {
@@ -18,7 +18,7 @@ SpaceShooter.createPlayer = function(game){
     else {
       this.body.velocity.y = 0;
     }
-    if (game.spaceKey.isDown) {
+    if (game.spaceKey.isDown || this.shooting) {
       this.shoot();
     }
 
@@ -31,18 +31,7 @@ SpaceShooter.createPlayer = function(game){
   }
 
   player.shoot = function(){
-    var bullet = this.bullets.getFirstDead();
-    if (!bullet) {
-      return;
-    }
-    if(game.currTime - this.lastShot > 250){
-      bullet.anchor.setTo(0.5);
-      bullet.reset(player.x+player.width, player.y+player.height*0.5);
-      bullet.body.velocity.x = 500;
-      bullet.checkWorldBounds = true;
-      bullet.outOfBoundsKill = true;
-      this.lastShot = game.currTime;
-    }
+    this.weapons[this.currWeapon].shoot(this.x,this.y);
   }
 
   return player;

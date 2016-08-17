@@ -1,8 +1,9 @@
-SpaceShooter.createSmallAsteroids = function(game){
+SpaceShooter.createSmallAsteroids = function(game, powerUp){
   smallAsteroids = game.add.group();
   smallAsteroids.enableBody = true;
   smallAsteroids.createMultiple(15, 'smallAsteroid');
   smallAsteroids.speed = 50;
+  smallAsteroids.powerUps = powerUp;
 
   smallAsteroids.addSmall = function(astX,astY) {
     var astNum = game.rnd.integerInRange(2, 4);
@@ -17,6 +18,7 @@ SpaceShooter.createSmallAsteroids = function(game){
       asteroid.reset(astX, astY);
       asteroid.body.velocity.x = hotizonstalspeed;
       asteroid.body.velocity.y = verticalspeed;
+      asteroid.powerUps = powerUp;
       asteroid.checkWorldBounds = true;
       asteroid.outOfBoundsKill = true;
     }

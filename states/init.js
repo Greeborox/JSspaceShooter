@@ -8,6 +8,7 @@ SpaceShooter.init = {
     game.load.image('enemyBullet', 'GFX/enemyBullet.png');
     game.load.image('bigAsteroid', 'GFX/bigAsteroid.png');
     game.load.image('smallAsteroid', 'GFX/smallAsteroid.png');
+    game.load.image('powerUp', 'GFX/powerUp.png');
     game.load.image('enemyShip', 'GFX/enemyShip.png');
     game.load.spritesheet('turret', 'GFX/turret.png',40,70);
     game.load.image('up', 'GFX/up.png');

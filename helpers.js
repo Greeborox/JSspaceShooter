@@ -70,6 +70,11 @@ SpaceShooter.enemyShipHit = function(bullet,enemy){
     enemy.hit();
   }
 }
+SpaceShooter.fEnemyShipHit = function(bullet,fship){
+  bullet.kill();
+  fship.kill();
+  fship.powerUps.add(fship.x,fship.y);
+}
 SpaceShooter.collectPowerUp = function(player,powerUp){
   var powerUps = ['single','double','triple','scatter','beam','doubleGrow']
   var collected = game.rnd.integerInRange(0, 5);

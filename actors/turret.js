@@ -1,5 +1,6 @@
 SpaceShooter.createTurrets = function(game, powerUp){
   turrets = game.add.group();
+  turrets.meters = 0;
   turrets.enableBody = true;
   turrets.createMultiple(5, 'turret');
   turrets.lastTurret = 0
@@ -45,7 +46,7 @@ SpaceShooter.createTurrets = function(game, powerUp){
   }
 
   turrets.update = function(){
-    if(game.currTime - this.lastTurret > this.turretsEvery){
+    if(game.currTime - this.lastTurret > this.turretsEvery && this.meters >= 60){
       if(game.rnd.integerInRange(0, 1)){
         this.spawn();
         console.log("spawning");

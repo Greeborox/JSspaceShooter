@@ -1,5 +1,6 @@
 SpaceShooter.main = {
   create: function() {
+    this.meters = 0;
     this.background = SpaceShooter.createBackground(game);
     this.weapons = SpaceShooter.createWeapons(game);
     this.player = SpaceShooter.createPlayer(game);
@@ -9,6 +10,14 @@ SpaceShooter.main = {
     this.bigAsteroids = SpaceShooter.createBigAsteroids(game, this.smallAsteroids, this.powerUps);
     this.turrets = SpaceShooter.createTurrets(game, this.powerUps);
     this.enemyShips = SpaceShooter.createEnemyShips(game, this.powerUps);
+    this.fEnemyShips = SpaceShooter.createFlyingEnemyShips(game, this.powerUps);
+    game.time.events.loop(Phaser.Timer.SECOND, function(){
+      if(this.player.alive){
+        this.turrets.meters += 1;
+        this.enemyShips.meters += 1;
+        this.fEnemyShips.meters += 1;
+      }
+    }, this)
     if (!game.device.desktop) {
       SpaceShooter.addMobileInputs(game, this.player);
     }
@@ -19,6 +28,7 @@ SpaceShooter.main = {
     game.physics.arcade.overlap(this.player.weapons[this.player.currWeapon], this.smallAsteroids, SpaceShooter.smallAsteroidHit, null, this);
     game.physics.arcade.overlap(this.player.weapons[this.player.currWeapon], this.turrets, SpaceShooter.turretHit, null, this);
     game.physics.arcade.overlap(this.player.weapons[this.player.currWeapon], this.enemyShips, SpaceShooter.enemyShipHit, null, this);
+    game.physics.arcade.overlap(this.player.weapons[this.player.currWeapon], this.fEnemyShips, SpaceShooter.fEnemyShipHit, null, this);
     game.physics.arcade.overlap(this.player, this.powerUps, SpaceShooter.collectPowerUp, null, this);
   }
 }

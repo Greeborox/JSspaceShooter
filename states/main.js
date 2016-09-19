@@ -1,5 +1,6 @@
 SpaceShooter.main = {
   create: function() {
+    game.score = 0;
     this.meters = 0;
     this.background = SpaceShooter.createBackground(game);
     this.weapons = SpaceShooter.createWeapons(game);
@@ -30,5 +31,16 @@ SpaceShooter.main = {
     game.physics.arcade.overlap(this.player.weapons[this.player.currWeapon], this.enemyShips, SpaceShooter.enemyShipHit, null, this);
     game.physics.arcade.overlap(this.player.weapons[this.player.currWeapon], this.fEnemyShips, SpaceShooter.fEnemyShipHit, null, this);
     game.physics.arcade.overlap(this.player, this.powerUps, SpaceShooter.collectPowerUp, null, this);
+    game.physics.arcade.overlap(this.player, this.bigAsteroids, SpaceShooter.hitPlayer, null, this);
+    game.physics.arcade.overlap(this.player, this.smallAsteroids, SpaceShooter.hitPlayer, null, this);
+    game.physics.arcade.overlap(this.player, this.enemyShips, SpaceShooter.hitPlayer, null, this);
+    game.physics.arcade.overlap(this.player, this.fEnemyShips, SpaceShooter.hitPlayer, null, this);
+    game.physics.arcade.overlap(this.player, this.turrets, SpaceShooter.hitPlayer, null, this);
+    game.physics.arcade.overlap(this.player, this.enemyShips.bullets, SpaceShooter.hitPlayer, null, this);
+    game.physics.arcade.overlap(this.player, this.fEnemyShips.bullets, SpaceShooter.hitPlayer, null, this);
+    game.physics.arcade.overlap(this.player, this.turrets.bullets, SpaceShooter.hitPlayer, null, this);
+    if(this.player.lives <= 0){
+      game.state.start('gameOver');
+    }
   }
 }

@@ -4,7 +4,7 @@ SpaceShooter.createBigAsteroids = function(game, small, powerUp){
   bigAsteroids.createMultiple(10, 'bigAsteroid');
   bigAsteroids.speed = 50;
   bigAsteroids.lastAsteroid = -200;
-  bigAsteroids.asteroidsEvery = 2200;
+  bigAsteroids.asteroidsEvery = 1800;
 
   bigAsteroids.addAsteroid = function() {
     var asteroid = this.getFirstDead();
@@ -20,6 +20,7 @@ SpaceShooter.createBigAsteroids = function(game, small, powerUp){
     asteroid.checkWorldBounds = true;
     asteroid.outOfBoundsKill = true;
     asteroid.powerUps = powerUp;
+    asteroid.scoreValue = 18;
   }
 
   bigAsteroids.update = function(){

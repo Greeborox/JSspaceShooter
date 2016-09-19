@@ -48,12 +48,14 @@ SpaceShooter.addMobileInputs = function(game, player){
 SpaceShooter.bigAsteroidHit = function(bullet,asteroid){
   asteroid.smallOnes.addSmall(asteroid.x,asteroid.y);
   asteroid.powerUps.add(asteroid.x,asteroid.y);
+  SpaceShooter.increaseScore(asteroid.scoreValue);
   bullet.kill();
   asteroid.kill();
 }
 SpaceShooter.smallAsteroidHit = function(bullet,asteroid){
   bullet.kill();
   asteroid.kill();
+  SpaceShooter.increaseScore(asteroid.scoreValue);
   SpaceShooter.createExplosion(asteroid.x,asteroid.y);
   asteroid.powerUps.add(asteroid.x,asteroid.y);
 }
@@ -61,6 +63,7 @@ SpaceShooter.turretHit = function(bullet,turret){
   bullet.kill();
   if(turret.vulnerable){
     turret.kill();
+    SpaceShooter.increaseScore(turret.scoreValue);
     SpaceShooter.createExplosion(turret.x,turret.y);
     turret.powerUps.add(turret.x,turret.y);
   }
@@ -73,14 +76,24 @@ SpaceShooter.enemyShipHit = function(bullet,enemy){
   }
 }
 SpaceShooter.fEnemyShipHit = function(bullet,fship){
+  SpaceShooter.increaseScore(fship.scoreValue);
   bullet.kill();
   fship.kill();
   SpaceShooter.createExplosion(fship.x,fship.y);
   fship.powerUps.add(fship.x,fship.y);
 }
 SpaceShooter.collectPowerUp = function(player,powerUp){
-  var powerUps = ['single','double','triple','scatter','doubleGrow']
-  var collected = game.rnd.integerInRange(0, 4);
-  player.currWeapon = powerUps[collected];
+  SpaceShooter.increaseScore(100);
+  player.increaseWeaponPower();
   powerUp.kill();
 }
+SpaceShooter.hitPlayer = function(player,enemy){
+  enemy.kill();
+  if(!player.invurnerable){
+    player.hitPlayer();
+  }
+  SpaceShooter.createExplosion(enemy.x,enemy.y);
+}
+SpaceShooter.increaseScore = function(score){
+  game.score += score;
+};

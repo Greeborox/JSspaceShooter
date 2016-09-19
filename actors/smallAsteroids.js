@@ -21,6 +21,7 @@ SpaceShooter.createSmallAsteroids = function(game, powerUp){
       asteroid.powerUps = powerUp;
       asteroid.checkWorldBounds = true;
       asteroid.outOfBoundsKill = true;
+      asteroid.scoreValue = 9;
     }
   }
 

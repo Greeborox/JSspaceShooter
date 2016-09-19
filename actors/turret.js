@@ -20,6 +20,7 @@ SpaceShooter.createTurrets = function(game, powerUp){
     turret.body.velocity.x = -90;
     turret.shootEvery = game.rnd.integerInRange(5000, 8000);
     turret.lastShoot = -500;
+    turret.scoreValue = 34;
     turret.vulnerable = false;
     turret.powerUps = powerUp;
     turret.checkWorldBounds = true;

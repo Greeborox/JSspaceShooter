@@ -21,12 +21,16 @@ SpaceShooter.init = {
     game.load.image('down', 'GFX/down.png');
     game.load.image('shoot', 'GFX/shoot.png');
     game.load.image('explosion', 'GFX/explosion.png');
+    game.load.image('livesTXT', 'GFX/livesTXT.png');
+    game.load.image('scoreTXT', 'GFX/scoreTXT.png');
+    game.load.image('gameOver', 'GFX/gameOver.png');
+    game.load.image('splash', 'GFX/splash.png');
+    game.load.spritesheet('score', 'GFX/scoreNums.png',25,40);
   },
   create: function() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
     game.renderer.renderSession.roundPixels = true;
     game.forceSingleUpdate = true;
-    game.stage.backgroundColor = '#3498db';
     game.cursor = game.input.keyboard.createCursorKeys();
     game.spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     if (!game.device.desktop) {
@@ -38,6 +42,6 @@ SpaceShooter.init = {
       document.body.style.backgroundColor = '#000';
     }
     game.currTime;
-    game.state.start('game');
+    game.state.start('welcome');
   }
 }

@@ -8,6 +8,7 @@ SpaceShooter.createEnemyShips = function(game, powerUp){
   enemyShips.bullets = game.add.group();
   enemyShips.bullets.enableBody = true;
   enemyShips.bullets.createMultiple(15, 'enemyBullet');
+  enemyShips.bullets.speed = 200;
 
   enemyShips.spawn = function() {
     var ship = this.getFirstDead();
@@ -21,6 +22,7 @@ SpaceShooter.createEnemyShips = function(game, powerUp){
     ship.shootEvery = game.rnd.integerInRange(5000, 8000);
     ship.lastShoot = -500;
     ship.HP = 3;
+    ship.scoreValue = 44;
     ship.vulnerable = true;
     ship.powerUps = powerUp;
     ship.hit = function(){
@@ -40,7 +42,7 @@ SpaceShooter.createEnemyShips = function(game, powerUp){
     }
     shot.anchor.setTo(0.5);
     shot.reset(location.x, location.y);
-    shot.body.velocity.x = -200;
+    shot.body.velocity.x = -this.bullets.speed;
     shot.body.velocity.y = 0;
     shot.checkWorldBounds = true;
     shot.outOfBoundsKill = true;
@@ -53,6 +55,11 @@ SpaceShooter.createEnemyShips = function(game, powerUp){
       }
       this.lastShip = game.currTime;
     }
+    if(this.meters === 180) {
+      this.lastShip = game.currTime;
+      this.shipEvery = 1800;
+      this.bullets.speed = 300;
+    }
     this.forEachExists(function(item){
       if(game.currTime - item.lastShoot > item.shootEvery){
         this.shoot(item)
@@ -63,6 +70,7 @@ SpaceShooter.createEnemyShips = function(game, powerUp){
       }
       if(item.HP <= 0) {
         item.kill();
+        SpaceShooter.increaseScore(item.scoreValue);
         SpaceShooter.createExplosion(item.x,item.y);
         item.powerUps.add(item.x,item.y);
       }

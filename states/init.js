@@ -3,8 +3,13 @@ var SpaceShooter = {};
 SpaceShooter.init = {
   preload: function() {
     game.load.image('background', 'GFX/bg.png');
+    game.load.image('sky', 'GFX/bgSky.png');
     game.load.image('player', 'GFX/player.png');
     game.load.image('bullet', 'GFX/bullet.png');
+    game.load.image('doubleBullet', 'GFX/doubleBullet.png');
+    game.load.image('tripleBullet', 'GFX/trippleBullet.png');
+    game.load.image('scatterBullet', 'GFX/scatterBullet.png');
+    game.load.image('doubleGrow', 'GFX/doubleGrow.png');
     game.load.image('enemyBullet', 'GFX/enemyBullet.png');
     game.load.image('bigAsteroid', 'GFX/bigAsteroid.png');
     game.load.image('smallAsteroid', 'GFX/smallAsteroid.png');
@@ -15,6 +20,7 @@ SpaceShooter.init = {
     game.load.image('up', 'GFX/up.png');
     game.load.image('down', 'GFX/down.png');
     game.load.image('shoot', 'GFX/shoot.png');
+    game.load.image('explosion', 'GFX/explosion.png');
   },
   create: function() {
     game.physics.startSystem(Phaser.Physics.ARCADE);

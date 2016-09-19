@@ -23,7 +23,7 @@ SpaceShooter.createWeapons = function(game){
 
   weapons.double = game.add.group();
   weapons.double.enableBody = true;
-  weapons.double.createMultiple(20, 'bullet');
+  weapons.double.createMultiple(20, 'doubleBullet');
   weapons.double.nextFire = 0;
   weapons.double.bulletSpeed = 500;
   weapons.double.fireRate = 250;
@@ -47,7 +47,7 @@ SpaceShooter.createWeapons = function(game){
 
   weapons.triple = game.add.group();
   weapons.triple.enableBody = true;
-  weapons.triple.createMultiple(20, 'bullet');
+  weapons.triple.createMultiple(20, 'tripleBullet');
   weapons.triple.nextFire = 0;
   weapons.triple.bulletSpeed = 500;
   weapons.triple.fireRate = 300;
@@ -84,7 +84,7 @@ SpaceShooter.createWeapons = function(game){
 
   weapons.scatter = game.add.group();
   weapons.scatter.enableBody = true;
-  weapons.scatter.createMultiple(30, 'bullet');
+  weapons.scatter.createMultiple(30, 'scatterBullet');
   weapons.scatter.nextFire = 0;
   weapons.scatter.bulletSpeed = 500;
   weapons.scatter.fireRate = 100;
@@ -104,30 +104,9 @@ SpaceShooter.createWeapons = function(game){
     }
   }
 
-  weapons.beam = game.add.group();
-  weapons.beam.enableBody = true;
-  weapons.beam.createMultiple(50, 'bullet');
-  weapons.beam.nextFire = 0;
-  weapons.beam.bulletSpeed = 1600;
-  weapons.beam.fireRate = 1;
-  weapons.beam.shoot = function(srcx,srcy){
-    var bullet = this.getFirstDead();
-    if (!bullet) {
-      return;
-    }
-    if(game.currTime > this.nextFire){
-      bullet.anchor.setTo(0.5);
-      bullet.reset(srcx+100, srcy+25);
-      bullet.body.velocity.x = this.bulletSpeed;
-      bullet.checkWorldBounds = true;
-      bullet.outOfBoundsKill = true;
-      this.nextFire = game.currTime + this.fireRate;
-    }
-  }
-
   weapons.doubleGrow = game.add.group();
   weapons.doubleGrow.enableBody = true;
-  weapons.doubleGrow.createMultiple(20, 'bullet');
+  weapons.doubleGrow.createMultiple(20, 'doubleGrow');
   weapons.doubleGrow.nextFire = 0;
   weapons.doubleGrow.bulletSpeed = 500;
   weapons.doubleGrow.fireRate = 250;

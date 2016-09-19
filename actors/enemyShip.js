@@ -63,6 +63,7 @@ SpaceShooter.createEnemyShips = function(game, powerUp){
       }
       if(item.HP <= 0) {
         item.kill();
+        SpaceShooter.createExplosion(item.x,item.y);
         item.powerUps.add(item.x,item.y);
       }
     },this)

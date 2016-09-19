@@ -1,7 +1,7 @@
 SpaceShooter.createFlyingEnemyShips = function(game, powerUp){
   fEnemyShips = game.add.group();
   fEnemyShips.enableBody = true;
-  fEnemyShips.createMultiple(5, 'fEnemyShip');
+  fEnemyShips.createMultiple(4, 'fEnemyShip');
   fEnemyShips.lastShip = 0
   fEnemyShips.meters = 0
   fEnemyShips.shipEvery = 3200;
@@ -11,9 +11,7 @@ SpaceShooter.createFlyingEnemyShips = function(game, powerUp){
 
   fEnemyShips.spawn = function() {
     var ship = this.getFirstDead();
-    if (!ship) {
-      return;
-    }
+    if (!ship) {return;}
     ship.path = [];
     var verticalPos = game.rnd.integerInRange(50, game.world.height - 100);
     var points = {
@@ -21,7 +19,7 @@ SpaceShooter.createFlyingEnemyShips = function(game, powerUp){
       'y': [verticalPos,]
     };
     for (var i = 0; i < points.x.length-1; i++) {
-      points.y.push(100,500);
+      points.y.push(game.rnd.integerInRange(100,500));
     }
     var x = 1 / game.width;
     for (var i = 0; i <= 1; i += x){
@@ -29,35 +27,21 @@ SpaceShooter.createFlyingEnemyShips = function(game, powerUp){
       var py = game.math.catmullRomInterpolation(points.y, i);
       ship.path.push( { x: px, y: py });
     }
-    ship.pi = 0;
+    ship.pos = 0;
     ship.reset(game.world.width, verticalPos);
     ship.anchor.setTo(0.5);
-    ship.shootEvery = game.rnd.integerInRange(5000, 8000);
+    ship.shootEvery = game.rnd.integerInRange(3000, 5000);
     ship.lastShoot = -500;
-    ship.HP = 3;
-    ship.vulnerable = true;
     ship.powerUps = powerUp;
-    ship.hit = function(){
-      this.tint = 0xff0000;
-      this.vulnerable = false;
-      game.time.events.add(500, function(){
-        this.vulnerable = true;
-        this.tint = 0xFFFFFF;
-      }, this);
-    }
   }
 
   fEnemyShips.shoot = function(location){
     var shot = this.bullets.getFirstDead();
-    if (!shot) {
-      return;
-    }
+    if (!shot) {return;}
     shot.anchor.setTo(0.5);
     shot.reset(location.x, location.y);
     shot.body.velocity.x = -200;
     shot.body.velocity.y = 0;
-    shot.checkWorldBounds = true;
-    shot.outOfBoundsKill = true;
   }
 
   fEnemyShips.update = function(){
@@ -72,14 +56,13 @@ SpaceShooter.createFlyingEnemyShips = function(game, powerUp){
         this.shoot(item)
         item.lastShoot = game.currTime;
       }
-      item.x = item.path[item.pi].x;
-      item.y = item.path[item.pi].y;
-      item.pi++;
-      if (item.pi >= item.path.length) {
+      item.x = item.path[item.pos].x;
+      item.y = item.path[item.pos].y;
+      item.pos++;
+      if (item.pos >= item.path.length) {
         item.kill();
       }
     },this)
   }
-
   return fEnemyShips;
 }
